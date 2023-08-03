@@ -395,3 +395,11 @@ main{
 .menu{
   display: none;
 }
+
+aside{
+  display: none;
+}
+
+.arrows{
+  display: none;
+}

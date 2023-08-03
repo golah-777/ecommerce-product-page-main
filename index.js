@@ -25,7 +25,12 @@ class App{
     this.two = document.querySelector('.img-two');
     this.three = document.querySelector('.img-three');
     this.four = document.querySelector('.img-four');
-
+    this.sideBar = document.querySelector('.mobile-side-bar');
+    this.menu=  document.querySelector('.menu');
+    this.colseMenu = document.querySelector('.close-menu');
+    this.nextImg = document.querySelector('.next');
+    this.previousImg = document.querySelector('.back');
+ 
    
    this.addEventListeners();
 
@@ -37,6 +42,8 @@ class App{
       this.quantity(event);
       this.addItemToCart(event);
       this.imgs(event);
+      this.sideBarMenu(event);
+      this.slideShow(event);
     })
   }
 
@@ -162,7 +169,28 @@ class App{
       four.classList.add('img-one');
     }
   }
+ 
+  sideBarMenu(event){
+    const menuClicked = this.menu.contains(event.target);
+    const colseMenuClicked = this.colseMenu.contains(event.target);
 
+    if(menuClicked){
+      this.sideBar.style.width = '100%';
+    } else if(colseMenuClicked){
+      this.sideBar.style.width = '0px';
+    }
+  }
+
+  slideShow(event){
+    const next = this.nextImg.contains(event.target);
+    const previous = this.previousImg.contains(event.target);
+
+    if(next){
+     console.log('gg')
+    }else if(previous){
+     console.log('ff')
+    }
+  }
   
 };
 
