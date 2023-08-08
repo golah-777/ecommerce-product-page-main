@@ -7,8 +7,8 @@ class App{
    this.emty = document.querySelector(".emty");
    this.item = document.querySelector(".item");
    this.checkoutBtn = document.querySelector(".checkoutdiv");
-   this.decrease= document.querySelector(".decrease");
-    this.increase= document.querySelector(".increase");
+   this.decrease= document.querySelector("#minus");
+    this.increase= document.querySelector("#plus");
     this.$value= document.querySelector(".value");
     this.count = 0;
     this.addToCart = document.querySelector(".add-to-cart-btn");
@@ -30,9 +30,18 @@ class App{
     this.colseMenu = document.querySelector('.close-menu');
     this.nextImg = document.querySelector('.next');
     this.previousImg = document.querySelector('.back');
- 
-   
-   this.addEventListeners();
+    this.bin = document.querySelector('.bin');
+
+    this.imgs = [
+      'image-product-1.jpg',
+      'image-product-2.jpg',
+      'image-product-3.jpg',
+      'image-product-4.jpg'
+    ]
+    this.i = 0;
+    this.j = this.imgs.length;
+
+    this.addEventListeners();
 
   }
 
@@ -41,17 +50,42 @@ class App{
       this.handleOnClick(event);
       this.quantity(event);
       this.addItemToCart(event);
-      this.imgs(event);
+      this.imges(event);
       this.sideBarMenu(event);
-      this.slideShow(event);
-    })
+      this.changeBackgroundImage(event);
+    });
   }
 
+  changeBackgroundImage(event){
+    const backClicked = this.nextImg.contains(event.target);
+    const nextClicked = this.previousImg.contains(event.target);
+
+    if(nextClicked){
+      this.i = (this.j+this.i+1) % this.j;
+      this.displayImgs ();
+    } else if(backClicked){
+      this.i = (this.j+this.i-1) % this.j;
+      this.displayImgs ();
+    }
+  }
+
+  displayImgs (){
+    this.mainImg.innerHTML = `
+     <img src=${this.imgs[this.i]}>
+    `
+  }
+
+  init() {
+    window.onload = () => {
+      this.displayImgs();
+    };
+  }
   
   handleOnClick(event){
     const cartClicked = this.cart.contains(event.target);
     const cart = this.cartInfo.contains(event.target);
     const checkoutBtnClicked = this.checkoutBtn.contains(event.target);
+    const bin = this.bin.contains(event.target);
 
     if (cartClicked){
      this.cartInfo.style.display='inline';
@@ -63,6 +97,13 @@ class App{
      this.emty.style.visibility='hidden';
      this.item.style.visibility='visible';
      this.checkoutBtn.style.visibility='visible';
+    } 
+    
+    if(bin){
+      this.emty.style.visibility='visible';
+      this.item.style.visibility='hidden';
+      this.checkoutBtn.style.visibility='hidden';
+      this.numberOfItems.style.display = 'none';
     }
     
     if (checkoutBtnClicked){
@@ -124,7 +165,7 @@ class App{
     this.total.innerText = total;
   }
 
-  imgs(event){
+  imges(event){
     const imgOneClicked = this.imgOne.contains(event.target);
     const imgTwoClicked = this.imgTwo.contains(event.target);
     const imgThreeClicked = this.imgThree.contains(event.target);
@@ -137,22 +178,30 @@ class App{
     const four = this.four; 
 
     if(imgOneClicked){
-      backgroungImg.classList.add('main-img');    backgroungImg.classList.remove('img-two');    backgroungImg.classList.remove('img-three');    backgroungImg.classList.remove('img-four');
+      backgroungImg.classList.add('main-img');
+      backgroungImg.classList.remove('img-two');
+      backgroungImg.classList.remove('img-three');
+      backgroungImg.classList.remove('img-four');
 
       one.classList.add('img-one');
       two.classList.remove('img-one');
       three.classList.remove('img-one');
       four.classList.remove('img-one');
     } else if(imgTwoClicked){
-      backgroungImg.classList.add('img-two');    backgroungImg.classList.remove('main-img');    backgroungImg.classList.remove('img-three');    backgroungImg.classList.remove('img-four');
+      backgroungImg.classList.add('img-two');   
+      backgroungImg.classList.remove('main-img');    
+      backgroungImg.classList.remove('img-three');   
+      backgroungImg.classList.remove('img-four');
 
       one.classList.remove('img-one');
       two.classList.add('img-one');
       three.classList.remove('img-one');
       four.classList.remove('img-one');
+      
     } else if (imgThreeClicked){
       backgroungImg.classList.add('img-three');
-      backgroungImg.classList.remove('main-img');    backgroungImg.classList.remove('img-two');
+      backgroungImg.classList.remove('main-img');
+      backgroungImg.classList.remove('img-two');
       backgroungImg.classList.remove('img-four');
 
       one.classList.remove('img-one');
@@ -161,7 +210,9 @@ class App{
       four.classList.remove('img-one');
     } else if (imgFourClicked){
       backgroungImg.classList.add('img-four');
-      backgroungImg.classList.remove('main-img');    backgroungImg.classList.remove('img-two');    backgroungImg.classList.remove('img-three');
+      backgroungImg.classList.remove('main-img');    
+      backgroungImg.classList.remove('img-two');    
+      backgroungImg.classList.remove('img-three');
 
       one.classList.remove('img-one');
       two.classList.remove('img-one');
@@ -181,17 +232,18 @@ class App{
     }
   }
 
-  slideShow(event){
-    const next = this.nextImg.contains(event.target);
-    const previous = this.previousImg.contains(event.target);
+  // slideShow(event){
+  //   const next = this.nextImg.contains(event.target);
+  //   const previous = this.previousImg.contains(event.target);
 
-    if(next){
-     console.log('gg')
-    }else if(previous){
-     console.log('ff')
-    }
-  }
+  //   if(next){
+  //    console.log('gg')
+  //   }else if(previous){
+  //    console.log('ff')
+  //   }
+  // }
   
 };
 
 const app = new App();
+app.init();

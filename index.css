@@ -331,6 +331,12 @@ main{
   border-radius: 9px;
 }
 
+.main-img img{
+  width: 10px;
+  height: 10px;
+  display: none;
+}
+
 .img-two{
   border: 0px solid;
   height: 75%;
@@ -402,4 +408,9 @@ aside{
 
 .arrows{
   display: none;
+}
+
+button{
+  border: 0px;
+  background-color: transparent;
 }
