@@ -337,6 +337,10 @@ main{
   display: none;
 }
 
+.shoes-img{
+ display: none;
+}
+
 .img-two{
   border: 0px solid;
   height: 75%;

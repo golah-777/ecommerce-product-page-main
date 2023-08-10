@@ -31,7 +31,9 @@ class App{
     this.nextImg = document.querySelector('.next');
     this.previousImg = document.querySelector('.back');
     this.bin = document.querySelector('.bin');
-
+     
+    this.shoes=  document.querySelector('.shoes-img');
+    console.log(this.shoes);
     this.imgs = [
       'image-product-1.jpg',
       'image-product-2.jpg',
@@ -52,26 +54,23 @@ class App{
       this.addItemToCart(event);
       this.imges(event);
       this.sideBarMenu(event);
-      this.changeBackgroundImage(event);
+      // this.changeBackgroundImage(event);
     });
-  }
 
-  changeBackgroundImage(event){
-    const backClicked = this.nextImg.contains(event.target);
-    const nextClicked = this.previousImg.contains(event.target);
-
-    if(nextClicked){
+    this.previousImg.addEventListener('click',()=>{
       this.i = (this.j+this.i+1) % this.j;
       this.displayImgs ();
-    } else if(backClicked){
+    });
+
+    this.nextImg.addEventListener('click',()=>{
       this.i = (this.j+this.i-1) % this.j;
       this.displayImgs ();
-    }
+    })
   }
 
   displayImgs (){
     this.mainImg.innerHTML = `
-     <img src=${this.imgs[this.i]}>
+     <img src=${this.imgs[this.i]} class="shoes-img">
     `
   }
 
@@ -104,6 +103,7 @@ class App{
       this.item.style.visibility='hidden';
       this.checkoutBtn.style.visibility='hidden';
       this.numberOfItems.style.display = 'none';
+      this.emty.innerText = 'Your cart is emty'
     }
     
     if (checkoutBtnClicked){
@@ -232,16 +232,6 @@ class App{
     }
   }
 
-  // slideShow(event){
-  //   const next = this.nextImg.contains(event.target);
-  //   const previous = this.previousImg.contains(event.target);
-
-  //   if(next){
-  //    console.log('gg')
-  //   }else if(previous){
-  //    console.log('ff')
-  //   }
-  // }
   
 };
 
