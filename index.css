@@ -331,6 +331,9 @@ main{
   border-radius: 9px;
 }
 
+.attribution { font-size: 11px; text-align: center; }
+.attribution a { color: hsl(228, 45%, 44%); }
+
 .main-img img{
   width: 10px;
   height: 10px;
